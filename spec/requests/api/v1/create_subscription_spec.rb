@@ -12,12 +12,11 @@ RSpec.describe 'Create subscription' do
     params = { title: 'bundle', price: 5.50, frequency: 'weekly', tea_id: @chai.id, customer_id: @eli.id }
     post '/api/v1/subscriptions', params: params.to_json
 
-    expect(response).to be_successful
     expect(response.status).to eq(201)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to have_key(:data)
     expect(parsed_response[:data]).to have_key(:type)
-    expect(parsed_response[:data][:type]).to eq('subscriptions')
+    expect(parsed_response[:data][:type]).to eq('subscription')
     expect(parsed_response[:data]).to have_key(:id)
     expect(parsed_response[:data][:id]).to be_a(Integer)
     expect(parsed_response[:data]).to have_key(:attributes)

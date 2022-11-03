@@ -3,9 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Cancel subscription' do
-  before :each do
-  end
-
   it 'returns formatted response' do
     eli = Customer.create!(first_name: 'eli', last_name: 'sachs', email: 'es@g', address: '2264 Dexter')
     chai = Tea.create!(title: 'chai', description: 'sweet', temperature: 100, brew_time: 5)
@@ -13,10 +10,9 @@ RSpec.describe 'Cancel subscription' do
     expect(subscription.status).to eq('active')
     patch "/api/v1/subscriptions/#{subscription.id}"
 
-    expect(response).to be_successful
     expect(response.status).to eq(202)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
-    expect(parsed_response[:data][:type]).to eq('subscriptions')
+    expect(parsed_response[:data][:type]).to eq('subscription')
     expect(parsed_response[:data][:id]).to be_a(Integer)
     expect(parsed_response[:data][:attributes].keys.length).to eq(6)
     expect(parsed_response[:data][:attributes][:title]).to eq('bundle')

@@ -7,7 +7,6 @@ RSpec.describe 'Create customer' do
     params = { first_name: 'eli', last_name: 'sachs', email: 'es@g', address: '2264 Dexter' }
     post '/api/v1/customers', params: params.to_json
 
-    expect(response).to be_successful
     expect(response.status).to eq(201)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response[:data][:type]).to eq('customers')
