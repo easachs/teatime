@@ -6,6 +6,7 @@ RSpec.describe CustomerSerializer do
   it 'formats a customer' do
     eli = Customer.create!(first_name: 'eli', last_name: 'sachs', email: 'es@g', address: '2264 Dexter')
     serializer = CustomerSerializer.new_customer_response(eli)
+
     expect(serializer).to be_a(Hash)
     expect(serializer.keys.length).to eq(1)
     expect(serializer).to have_key(:data)
