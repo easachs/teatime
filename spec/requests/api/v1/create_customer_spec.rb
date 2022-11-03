@@ -28,28 +28,34 @@ RSpec.describe 'Create customer' do
     expect(parsed_response[:data][:attributes][:address]).to eq(Customer.last.address)
   end
 
-  it 'errors when fields blank' do
+  it 'errors when address field blank' do
     params = { first_name: 'eli', last_name: 'sachs', email: 'es@g' }
 
     post '/api/v1/register', params: params.to_json
     expect(response.status).to eq(400)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to eq({ error: "Address can't be blank" })
+  end
 
+  it 'errors when email field blank' do
     params = { first_name: 'eli', last_name: 'sachs', address: '2264 Dexter' }
 
     post '/api/v1/register', params: params.to_json
     expect(response.status).to eq(400)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to eq({ error: "Email can't be blank" })
+  end
 
+  it 'errors when last_name field blank' do
     params = { first_name: 'eli', email: 'es@g', address: '2264 Dexter' }
 
     post '/api/v1/register', params: params.to_json
     expect(response.status).to eq(400)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
     expect(parsed_response).to eq({ error: "Last name can't be blank" })
+  end
 
+  it 'errors when first_name field blank' do
     params = { last_name: 'sachs', email: 'es@g', address: '2264 Dexter' }
 
     post '/api/v1/register', params: params.to_json
@@ -75,6 +81,6 @@ RSpec.describe 'Create customer' do
     post '/api/v1/register'
     expect(response.status).to eq(400)
     parsed_response = JSON.parse(response.body, symbolize_names: true)
-    expect(parsed_response).to eq({ error: 'missing JSON payload in request body' })
+    expect(parsed_response).to eq({ error: 'missing payload in request body' })
   end
 end
