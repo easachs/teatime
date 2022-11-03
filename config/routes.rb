@@ -3,8 +3,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :customers, path: 'register', only: %i[create]
-      resources :subscriptions, only: %i[index create update]
+      resources :customers, only: %i[show create]
+      resources :subscriptions, only: %i[create update]
       # resources :teas, only: %i[index]
     end
   end

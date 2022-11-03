@@ -10,6 +10,7 @@ RSpec.describe 'Cancel subscription' do
     eli = Customer.create!(first_name: 'eli', last_name: 'sachs', email: 'es@g', address: '2264 Dexter')
     chai = Tea.create!(title: 'chai', description: 'sweet', temperature: 100, brew_time: 5)
     subscription = Subscription.create!(title: 'bundle', price: 5.50, frequency: 'weekly', tea: chai, customer: eli)
+    expect(subscription.status).to eq('active')
     patch "/api/v1/subscriptions/#{subscription.id}"
 
     expect(response).to be_successful
