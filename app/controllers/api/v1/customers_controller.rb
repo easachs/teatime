@@ -4,12 +4,7 @@ module Api
   module V1
     class CustomersController < ApplicationController
       def show
-        subscriptions = Subscription.where(customer_id: request_params[:id]) if request_params
-        if !request_params[:customer_id]
-          render json: { error: 'missing customer_id in request body' }, status: :bad_request
-        else
-          render json: CustomerSerializer.tea_subscriptions(subscriptions)
-        end
+        render json: SubscriptionSerializer.tea_subscriptions(params[:id])
       end
 
       def create
