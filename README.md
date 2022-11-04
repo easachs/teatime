@@ -32,7 +32,7 @@ Subscriptions
 
 ## ENDPOINTS
 
-4 total RESTful API endpoints, two of which (create customer and create subscription) require a JSON body.
+Five total RESTful API endpoints, two of which (create customer and create subscription) require a JSON body.
 
 * creating customers
 
@@ -61,6 +61,10 @@ Subscriptions
 * accessing all of a customer's subscriptions (both active and cancelled)
 
   `GET /api/v1/customers/:id`
+
+* listing all teas
+
+  `GET /api/v1/teas`
 
 
 ## SET UP
