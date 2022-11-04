@@ -45,6 +45,7 @@ RSpec.describe SubscriptionSerializer do
     expect(serializer[:data]).to have_key(:type)
     expect(serializer[:data]).to have_key(:subscriptions)
     expect(serializer[:data][:subscriptions]).to be_a(Array)
+    expect(serializer[:data][:subscriptions].length).to eq(4)
     subscriptions = serializer[:data][:subscriptions]
     subscriptions.each do |subscription|
       expect(subscription).to have_key(:id)
